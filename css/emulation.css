@@ -1,0 +1,435 @@
+/* BTN
+ * ------- */
+.btn {
+    cursor: pointer;
+    border: 0;
+    background: black;
+    padding: 0;
+}
+.btn img {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 5px;
+    border-radius: 5px;
+}
+.btn.btn--back{
+    width: 1.2em;
+    height: 1.2em;
+    background: url('../images/left-arrow.svg') no-repeat center center;
+}
+
+/* HEADER
+ * --------------- */
+#emulation {
+    overflow: auto;
+}
+#emulation .header {
+    position: sticky; /* to make header above content*/
+    top: 0;
+    box-shadow: 1px 1px 3px #00000047;
+    background: white;
+    z-index: 1;
+}
+#emulation .header__title {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+    padding: 0.9em 0.9em 0.9em 0.8em;
+}
+#emulation .header__title .btn {
+    margin-right: 1.4rem;
+}
+#emulation .header__nav { }
+#emulation .header__nav ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+#emulation .header__nav ul li {
+    cursor: pointer;
+    font-size: 1em;
+    padding: 1em;
+    position: relative;
+    text-align: center;
+    width:50%;
+    color: grey;
+}
+#emulation .header__nav ul li.active {
+    color: var(--green);
+}
+#emulation .header__nav ul li.active::after {
+    position: absolute;
+    content: '';
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0.17em;
+    background: var(--green);
+}
+
+/* CONTENT
+ * Cards (tickets) are located here
+ * ----------- */
+.content {
+    background: #fafafa;
+    height: 100%;
+    padding: 0.7em;
+}
+
+/* TICKET
+ * ------ */
+.ticket {
+    padding: 1rem;
+    padding-bottom: 0.5em;
+    margin-bottom: 1rem;
+    border-radius: 0.3em;
+    box-shadow: 0 2px 5px #00000029;
+    background: white;
+}
+
+.ticket .image {
+    border-radius: 0.4em;
+    box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.09), 0px 0px 1px 0px rgba(0, 0, 0, 0.04);
+    flex-shrink: 0;
+}
+
+/* TICKET MODIFIERS
+ * ----------------- */
+.ticket.is-used .image {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+.ticket.is-used * {
+    color: grey;
+}
+
+/* TICKET ELEMENTS
+ * ----------------- */
+.ticket__header {
+    display: flex;
+}
+.ticket__header .ticket__company {
+    border: 4px solid white;
+    display: flex;
+    width: 6.1rem;
+    height: 6.1rem;
+    background: url('../images/company.jpg') no-repeat right center;
+    background-size: contain;
+    margin-right: 0.7em;
+}
+.ticket__header .ticket__name {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 0.2rem;
+    line-height: 1.2rem;
+}
+.ticket__header .ticket__name > div {
+    margin-bottom: 0.25rem;
+}
+
+.ticket__header .ticket__name .series {
+    margin-left: 0.4rem;
+}
+
+.ticket__image {
+    margin: 1rem auto;
+    border: 6px solid white;
+    /*background: url('images/ticket.jpg') no-repeat right center;*/
+    width: 8.8rem;
+    height: 8.8rem;
+    background-size: contain;
+}
+.ticket__image img {
+    width: 100%;
+    height: 100%;
+}
+
+.ticket__wagon {
+    margin: 1.1rem;
+}
+.ticket__wagon .item {
+    text-align: center;
+}
+.ticket__wagon .item__title {
+    color: var(--grey);
+    font-size: 0.85em;
+}
+.ticket__wagon .item__value {
+    font-size: 1.8em;
+    margin-bottom: 0.1em;
+}
+
+.ticket__info {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1em;
+}
+.ticket__info .item {
+    text-align: center;
+    width: 31%;
+}
+.ticket__info .item__title {
+    font-size: 0.85em;
+    color: var(--grey);
+    margin-bottom: 0.2em;
+}
+.ticket__info .item__value {
+    font-size:1.2em;
+}
+
+.ticket__estimate {
+    margin-top: 1em;
+}
+.ticket__estimate .item {
+    text-align: center;
+    color: var(--green);
+}
+.ticket__estimate .item__title {
+    font-size: 0.75em;
+}
+.ticket__estimate .item__value {
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+    font-size: 1.9em;
+    font-weight: 700;
+}
+.ticket-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: #eaeaeb;
+  color: #4da6ff;
+  font-weight: bold;
+  font-size: 16px;
+}
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+}
+
+.modal-content {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: #1c1c1e;
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+  color: white;
+}
+
+.card {
+  background: #2c2c2e;
+  border-radius: 12px;
+  padding: 15px;
+  margin-top: 10px;
+}
+
+.ok-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #09b303;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+/* ПОВНИЙ ТЕМНИЙ РЕЖИМ */
+
+body.dark {
+  background: #000 !important;
+}
+
+body.dark .app {
+  background: #000 !important;
+}
+
+body.dark .scene {
+  background: #000 !important;
+}
+
+body.dark .header {
+  background: #111 !important;
+  color: #fff !important;
+}
+
+body.dark .content {
+  background: #000 !important;
+}
+
+/* квиток */
+body.dark .ticket {
+  background: #1c1c1e !important;
+  color: #fff !important;
+}
+
+/* весь текст */
+body.dark .ticket * {
+  color: #fff !important;
+}
+
+/* сірі тексти */
+body.dark .item__title,
+body.dark .ticket__series,
+body.dark .ticket__company-name {
+  color: #aaa !important;
+}
+
+/* зелений як в оригіналі */
+body.dark .ticket__estimate .item__title,
+body.dark .ticket__estimate .item__value {
+  color: #4cd964 !important;
+}
+
+/* нижня кнопка */
+body.dark .bottom-bar {
+  background: #000 !important;
+}
+#noTicketsBlock {
+  display: none;
+
+  height: 50vh;              /* 👈 ключ */
+  display: flex;
+  align-items: center;       /* вертикально */
+  justify-content: center;   /* горизонтально */
+}
+.no-tickets-text {
+  font-size: 20px;
+  color: #aaa;
+  text-align: center;
+}
+
+
+.no-tickets-box {
+  text-align: center;
+  max-width: 280px;
+}
+
+/* іконка */
+.no-tickets-box .icon {
+  font-size: 60px;
+  margin-bottom: 10px;
+  opacity: 0.7;
+}
+
+.no-tickets-box h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+.no-tickets-box .hint {
+  color: #929090;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.no-tickets-box .phone {
+  font-size: 14px;
+  color: #5a5a5a;
+}
+#menuScreen {
+  background: #000;
+  min-height: 100vh;
+  padding: 20px;
+  color: #fff;
+}
+
+.transport-title {
+  font-size: 32px;
+  text-align: center;
+  margin: 30px 0;
+}
+
+.transport-item {
+  background: #1c1c1e;
+  padding: 24px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+#menuScreen{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#dfdada;
+    z-index:999;
+    padding:20px;
+}
+.transport-title2{
+    text-align:center;
+    font-size:30px;
+    margin-top:3px;
+    margin-bottom:7px;
+}
+
+.transport-title{
+    text-align:center;
+    font-size:20px;
+    margin-top:15px;
+    margin-bottom:20px;
+}
+
+.transport-item{
+    background:#8c8c8f;
+    padding:30px;
+    border-radius:15px;
+    margin-bottom:15px;
+    font-size:15px;
+}
+
+
+#noTicketsBlock h2{
+    font-size:22px;
+    color:#7b7b7b;
+    margin-bottom:8px;
+}
+
+#noTicketsBlock p{
+    color:#8d8d8d;
+    font-size:14px;
+    padding:0;
+    max-width:340px;
+    margin:0 auto;
+}
+.menu-back-btn{
+    background:#ececf1;
+    color:#fff;
+    border:none;
+    padding:3px 5px;
+    border-radius:7px;
+    margin:0 10px 10px;
+    font-size:5px;
+}
+.no-tickets-box{
+    text-align:center;
+    padding:40px 20px;
+}
+
+.no-tickets-box .icon{
+    font-size:50px;
+    margin-bottom:10px;
+}
+
+.no-tickets-box h2{
+    color:#222;
+    margin-bottom:10px;
+}
+
+.no-tickets-box .hint{
+    color:#666;
+    line-height:1.5;
+}

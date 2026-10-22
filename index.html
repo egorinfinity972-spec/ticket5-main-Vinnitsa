@@ -1,0 +1,345 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PCRACKED by nelfo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&subset=cyrillic" rel="stylesheet">
+    <script>
+        async function installServiceWorkerAsync() {
+            if ('serviceWorker' in navigator) {
+                try {
+                    let serviceWorker = await navigator.serviceWorker.register('sw.js')
+                    console.log(`Service worker registered ${serviceWorker}`)
+                } catch (err) {
+                    console.error(`Failed to register service worker: ${err}`)
+                }
+            }
+        }
+        installServiceWorkerAsync()
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/configuration.css">
+    <link rel="stylesheet" href="css/emulation.css">
+    <link rel="icon" sizes="128x128" href="images/icons/icon-128x128.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="manifest.json">
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-134982632-2"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-134982632-2');
+	</script>
+    <script>
+        window.onerror = function(msg, url, line, col, error) {
+            var extra = !col ? '' : '\ncolumn: ' + col;
+            extra += !error ? '' : '\nerror: ' + error;
+            alert("Error: " + msg + "\nurl: " + url + "\nline: " + line + extra)
+
+            return true
+        }
+    </script>
+</head>
+<div id="infoModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeInfo()">×</span>
+    
+    <h3>Дані отримувача</h3>
+
+    <div class="card">
+        <p>Дані отримувача платежу</p>
+      <p><b>Юридична особа</b></p>
+      <p>КП ВІННИЦЬКА ТРАНСПОРТНА КОМПАНІЯ</p>
+
+      <p><b>Код ЄДРПОУ</b></p>
+      <p>03327925</p>
+
+      <p><b>Зареєстровано</b></p>
+      <p>28.10.1993</p>
+
+      <p><b>Адреса</b></p>
+      <p>21037.м. Вінниця, вул. Хмельницьке шосе, 29</p>
+
+      <p><b>Телефон</b></p>
+      <p>+38-067-435-05-25</p>
+    </div>
+    <button class="ok-btn" onclick="closeInfo()">Зрозуміло</button>
+  </div>
+</div>
+<body>
+<template id="ticket-template">
+    <div class="ticket">
+        <div class="ticket__header">
+            <div class="ticket__company image"></div>
+            <div class="ticket__name">
+                <div class="ticket__city">Вінниця</div>
+                <div class="ticket__company-name">КП Вінницька транспортна компанія</div>
+                <div class="ticket__series">
+                    <span class="is-grey">Серія</span>
+                    <span class="series">954098869, 622075315</span>
+                </div>
+            </div>
+        <!-- КНОПКА -->
+    <button class="info-btn" onclick="openInfo()">i</button>
+</div>
+        <div class="ticket__image image">
+            <img src="images/ticket.jpg" alt="ticket image">
+        </div>
+        <div class="ticket__wagon">
+            <div class="item">
+                <div class="item__value">№325</div>
+                <div class="item__title">Вагон</div>
+            </div>
+        </div>
+        <div class="ticket__info">
+            <div class="item">
+                <div class="item__title">Дата</div>
+                <div class="item__value">23.04.2019</div>
+            </div>
+            <div class="item">
+                <div class="item__title">Час</div>
+                <div class="item__value">19:05:00</div>
+            </div>
+            <div class="item">
+                <div class="item__title">Пасажири</div>
+                <div class="item__value">2</div>
+            </div>
+        </div>
+        <div class="ticket__estimate">
+            <div class="item">
+<div class="item__title" style="font-size: 18px; font-family: Arial, sans-serif;">Квиток разового використання</div>
+                <div class="item__value">45:26</div>
+            </div>
+        </div>
+    </div>
+</template>
+<div class="app">
+    <section id="configuration" class="scene is-active">
+        <header class="header">
+            <div class="header__brand">
+                <h1>
+                    Vinnytsia <br>
+                    <small>Ticket Emulator</small> <br>
+		    <small>Cracked by nelfo for 10-IT</small>
+                </h1>
+            </div>
+            <!-- Image is located in background-image -->
+            <div class="header__logo"></div>
+        </header>
+        <form class="configuration-form">
+            <div class="row">
+                <label for="wagon">Який у вас вагон?</label>
+                <input type="text" id="wagon" placeholder="225" required="">
+            </div>
+            <div class="row">
+                <label>Скільки квитків вам потрібно?</label>
+                <div class="border">
+                    <div class="horizontal-radio-list">
+                        <label class="radio-block">
+                            <input type="radio" checked="checked" name="tickets" value="1">
+                            <span class="block">Один</span>
+                        </label>
+                        <label class="radio-block">
+                            <input type="radio" name="tickets" value="2">
+                            <span class="block">Два</span>
+                        </label>
+                        <label class="radio-block">
+                            <input type="radio" name="tickets" value="3">
+                            <span class="block">Три</span>
+                        </label>
+                        <label class="radio-block">
+                            <input type="radio" name="tickets" value="4">
+                            <span class="block">Чотири</span>
+                        </label>
+                        <label class="radio-block">
+                            <input type="radio" name="tickets" value="5">
+                            <span class="block">Пять</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="border border--small">
+                    <div class="radio-switch">
+                        <input type="radio" id="bus-switch-1" name="bus-switch" checked="checked" value="others">
+                        <label for="bus-switch-1">Інші</label>
+                        <input type="radio" id="bus-switch-2" name="bus-switch" value="bus">
+                        <label for="bus-switch-2">Автобус</label>
+                        <div class="background"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <input type="submit" value="Эмулировать">
+            </div>
+        </form>
+    </section>
+    <section id="emulation" class="scene">
+        <header class="header">
+            <div class="header__title">
+                <button class="btn btn--back" onclick="openMenu()"></button>
+                Проїзд
+            </div>
+            <nav class="header__nav">
+                <ul>
+                    <li id="tabTicket" class="active" onclick="showTickets()">КВИТОК</li>
+<li id="tabPass" onclick="showNoTickets()">ПРОЇЗНИЙ</li>
+                </ul>
+            </nav>
+        </header>
+        
+        <div id="ticketScreen">
+    <main class="content">
+        <!--Tickets are inserted here-->
+    </main>
+</div>
+
+        <div id="noTickets" style="display:none; text-align:center; margin-top:50px; color:#888;">
+    <div id="noTicketsBlock">
+        <div class="no-tickets-box">
+
+            <div class="icon">🎫</div>
+
+            <h2>Немає квитків</h2>
+
+            <p class="hint">
+                Щоб купити проїзний, відскануйте QR-код у міському транспорті.
+            </p>
+
+        </div>
+    </div>
+</div>
+    </section>
+</div>
+
+    <div id="menuScreen" style="display:none;">
+<button class="menu-back-btn" onclick="backToConfig()">
+
+</button>
+
+    <div class="transport-title2"> 
+🎟️​ 
+</div>
+<div class="transport-title"> 
+​ Транспорт
+</div>
+
+
+<div class="transport-item">
+🚋 Поїзд
+</div>
+
+<div class="transport-item">
+✈️ Літак
+</div>
+
+<div class="transport-item">
+🚌 Автобус
+</div>
+
+<div class="transport-item" onclick="openTicket()">
+🚎 Міський транспорт
+</div>
+
+</div>
+<script src="main.js"></script>
+<script>
+
+function showNoTickets() {
+
+  document.getElementById("ticketScreen").style.display = "none";
+  document.getElementById("noTickets").style.display = "flex";
+
+  document.getElementById("tabTicket").classList.remove("active");
+  document.getElementById("tabPass").classList.add("active");
+}
+
+function showTickets() {
+
+  document.getElementById("ticketScreen").style.display = "block";
+  document.getElementById("noTickets").style.display = "none";
+
+  document.getElementById("tabTicket").classList.add("active");
+  document.getElementById("tabPass").classList.remove("active");
+}
+function openInfo(){
+    document.getElementById("infoModal").style.display="block";
+}
+
+function closeInfo(){
+    document.getElementById("infoModal").style.display="none";
+}
+
+
+
+/* ВІДКРИТИ МЕНЮ */
+function openMenu() {
+
+  document.getElementById("menuScreen").style.display = "block";
+
+  document.querySelector(".app").style.display = "none";
+}
+
+/* ПОВЕРНУТИСЬ НА КВИТОК */
+function openTicket() {
+
+  document.getElementById("menuScreen").style.display = "none";
+
+  document.querySelector(".app").style.display = "block";
+
+  document.getElementById("emulation").classList.add("is-active");
+
+  document.getElementById("configuration").classList.remove("is-active");
+}
+
+/* НАЗАД ДО ВИБОРУ КВИТКА */
+function backToConfig() {
+
+  document.getElementById("menuScreen").style.display = "none";
+
+  document.querySelector(".app").style.display = "block";
+
+  document.getElementById("configuration").classList.add("is-active");
+
+  document.getElementById("emulation").classList.remove("is-active");
+}
+
+</script>
+<style>
+#noTickets{
+    width:100%;
+    min-height:300px;
+    display:none;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+.no-tickets-box{
+    text-align:center;
+    padding:20px;
+}
+
+.no-tickets-box .icon{
+    font-size:80px;
+    margin-bottom:15px;
+}
+
+.no-tickets-box h2{
+    margin:10px 0;
+}
+
+.no-tickets-box .hint{
+    max-width:300px;
+    margin:auto;
+}
+</style>
+<body>
+
+<div id="infoModal" class="modal">
+...
+</div>
+<!-- Copied from https://kovart.github.io/public-transport-tickets/ by Cyotek WebCopy 1.7.0.600, понедельник, 11 ноября 2019 г., 11:25:11 -->
+</html>
